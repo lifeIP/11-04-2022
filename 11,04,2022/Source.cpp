@@ -29,6 +29,38 @@ namespace ct {
 			this->sex = sex;
 		}
 
+		//operator overloading
+		Cat & operator ++() {
+			weight++;
+			return *this;
+		}
+
+		Cat& operator --() {
+			weight--;
+			return *this;
+		}
+
+		bool operator > (const Cat& M) {
+			if (this->weight > weight) {
+				return true;
+			}
+			return false;
+		}
+		
+		bool operator < (const Cat& M) {
+			if (this->weight > weight) {
+				return false;
+			}
+			return true;
+		}
+
+		bool operator == (const Cat& M) {
+			if (this->weight == weight) {
+				return true;
+			}
+			return false;
+		}
+
 		// constructor copy
 		Cat(const Cat& other) {
 			this->color = other.color;
@@ -101,5 +133,14 @@ int main() {
 	cat3.getThis();
 	cat3.meows();
 
+	std::cout << "" << std::endl;
+	std::cout << "Cat3" << std::endl;
+	++cat3;
+	cat3.getDATAcat();
+	cat3.getThis();
+	cat3.meows();
 	func(cat1);
+	std::cout << "\n\n\n" << (cat3 < cat2) << std::endl;
+	std::cout << (cat3 > cat2) << std::endl;
+	std::cout << (cat3 == cat2) << std::endl;
 }
