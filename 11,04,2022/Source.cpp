@@ -1,6 +1,54 @@
 #include <string.h>
 #include <iostream>
 
+
+
+
+
+namespace pets {
+	enum life_position { cheerful, sad, kind, angry, whatever };
+	enum difficulty_in_training { very_difficult, difficult, normal, easy, very_easy };
+	enum species_of_the_animal{ bird, fish, animal, insect };
+
+	class Pet
+	{
+	public:
+		Pet(int number_of_paws, pets::life_position, pets::difficulty_in_training difficulty, pets::species_of_the_animal species) {
+			this->number_of_paws = number_of_paws;
+			this->life_pos = life_pos;
+			this->difficulty = difficulty;
+			this->species = species;
+		};
+
+		void getData() const {
+			std::cout<< number_of_paws <<std::endl;
+			std::cout << life_pos << std::endl;
+			std::cout << difficulty << std::endl;
+			std::cout << species << std::endl;
+		}
+
+		bool operator ==(const Pet&) {
+			if (this->species == species) return true;
+			return false;
+		}
+
+		~Pet();
+
+	private:
+		int number_of_paws;
+		life_position life_pos;
+		difficulty_in_training difficulty;
+		species_of_the_animal species;
+	protected:
+		const pets::Pet* find_whatever() {
+			if (this->life_pos == whatever) {
+				return this;
+			}
+			return nullptr;
+		}
+	};
+}
+
 namespace ct {
 	enum colors { Orange, White, Black, Gray, Other };
 	class Cat
@@ -61,6 +109,19 @@ namespace ct {
 			return false;
 		}
 
+		operator int() {
+			return this->weight;
+		}
+
+		operator double() {
+			return this->weight;
+		}
+
+		operator char*() {
+			return this->name;
+		}
+
+
 		// constructor copy
 		Cat(const Cat& other) {
 			this->color = other.color;
@@ -75,20 +136,21 @@ namespace ct {
 			this->name[i] = 0;
 		}
 
-		void getDATAcat() {
+		void getDATAcat() const{
 			std::cout << name << std::endl;
 			std::cout << color << std::endl;
 			std::cout << sex << std::endl;
 			std::cout << weight << std::endl;
 		}
-		void meows() {
+		void meows() const{
 			std::cout << "meows" << std::endl;
 		}
-		void getThis() {
+		void getThis() const {
 			std::cout << this << std::endl;
 		}
 
 		~Cat() {
+			std::cout << "Object was destroy!!! " << this << std::endl;
 			delete[] name;
 		}
 
@@ -104,6 +166,8 @@ void func(ct::Cat copyValue) {
 	copyValue.meows();
 }
 
+
+
 int main() {
 	std::cout << "Cats!!!" << std::endl;
 	char name1[] = { "Murzik\0" };
@@ -114,6 +178,7 @@ int main() {
 	ct::Cat cat2(name2, ct::Black, 'G', 156.25);
 	ct::Cat cat3(name3, ct::White, 'G', 21.565);
 
+/*	
 	std::cout << "" << std::endl;
 	std::cout << "Cat1" << std::endl;
 	cat1.getDATAcat();
@@ -143,4 +208,7 @@ int main() {
 	std::cout << "\n\n\n" << (cat3 < cat2) << std::endl;
 	std::cout << (cat3 > cat2) << std::endl;
 	std::cout << (cat3 == cat2) << std::endl;
+	std::cout << int(cat1) << std::endl;
+*/
 }
+
